@@ -5,7 +5,7 @@
             "name":"LAUNCH CURRENT FILE WITH ARGS",
             "type":"cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": ["45"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
