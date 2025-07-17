@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name":"LAUNCH WITH ARGS",
+            "name":"LAUNCH CURRENT FILE WITH ARGS",
             "type":"cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/lcs",
-            "args": ["barrios", "brrarhss"],
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": ["45"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

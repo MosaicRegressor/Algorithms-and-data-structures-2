@@ -9,19 +9,6 @@ successione di fibonacci
 #include <stdlib.h>
 #include <limits.h>
 
-// in: posizione voluta
-// out: numero alla posizione volta nella successione di fibonacci
-int fibonacci_slow(int pos){
-    if (pos == 1){
-        return 0;
-    }
-    else if(pos == 2){
-        return 1;
-    }
-    // per avere il numero alla posizione pos, devo sommare i numeri alle posizioni pos - 1 e pos -2
-    return fibonacci_slow(pos - 1) + fibonacci_slow(pos - 2);
-}
-
 /*
 parses a cstring and parses it to a long int.
 
@@ -47,7 +34,7 @@ long int str_to_lint(char* str){
     char* endptr = 0;
     errno = 0;
     
-    int parse_result = strtol(str, &endptr, 10);
+    long int parse_result = strtol(str, &endptr, 10);
 
     // check if string does not represent a value which is too big or small
     if((parse_result == LONG_MAX || parse_result == LONG_MIN) && errno == ERANGE) {
@@ -67,11 +54,93 @@ long int str_to_lint(char* str){
     return parse_result;
 }
 
+
+/*
+sets an array to defined behavior, initalizes the array to default value.
+
+input: pointer to acces the array, size of the array
+output: void
+
+it just iterates through the array cells, and sets their value to the default value, 0.
+*/
+void init_int_array(int* arr_ptr, int arr_size){
+    for(int i = 0; i < arr_size; i++) {
+        arr_ptr[i] = 0;
+    }
+}
+
+
+/*
+iterates through the cells of an array and prints the individual cell's content.
+
+input: ptr to the array
+output: void
+*/
+void print_int_array(int arr[], int arr_size) {
+    for(int i = 0; i < arr_size; i++) {
+        arr[i] = 0;
+    }
+}
+
+
+/*
+gives number at a certain position in fibonacci succession
+
+input: position of wanted number in fib. succession
+output: number at the wante position in fibonacci succession
+
+problem: it is damn slow!
+that's because this implementation recalculates the same subproblems multiple times.
+The nodes of the recursion tree explode, the average time is exponential! as a matter of fact, starting from input >40
+the response time start to get noticeably slower.
+*/
+int fibonacci_slow(int pos){    // FIXME the position is an unsigned int
+    if (pos == 1){
+        return 0;
+    }
+    else if(pos == 2){
+        return 1;
+    }
+    // to get tge number at the position specified by pos, i have to sumthe number at the positions pos - 1 e pos -2
+    return fibonacci_slow(pos - 1) + fibonacci_slow(pos - 2);
+}
+
+/*
+a bit beacuse O is a power of n, which is not that fast, but way faster compared to 2^N.
+
+we achieved this optimization by caching the recurrent subproblems' solutions in a table: this technique is called dynamic programming.
+Dynamic programming introduces some overhead, which is given by accessing and storing the caching table, but if the upsides are higher than the downsides, it's the way to go.
+*/
+int fibonacci_a_bit_faster(int pos){    // FIXME position is an unsigned int
+    int caching_table_size = pos;   
+    int *caching_table = malloc(sizeof(int) * caching_table_size);
+    init_int_array(caching_table, caching_table_size);
+
+    caching_table[0] = 0;   // first value in fibonacci's succession
+    caching_table[1] = 1;
+
+    for(int i = 2; i < caching_table_size; i++) {
+        caching_table[i] = caching_table[i - 1] + caching_table[i - 2];
+    }
+
+    int fib_num_at_pos = caching_table[pos - 1];
+
+    free(caching_table);
+
+    return fib_num_at_pos;
+}
+
+
 int main(int argc, char* argv[argc + 1]) {
     if(argc > 1){
         int parsed_input = 0;
 
         parsed_input = (int) str_to_lint(argv[1]);  // FIXME long int casted to int, loss of info
+        
+        puts("Start fibonacci with dynamic programming:");
+        printf("%d\n", fibonacci_a_bit_faster(parsed_input));
+
+        puts("Start fibonacci without dynamic programming:");
         printf("%d\n", fibonacci_slow(parsed_input));
     }
     else{
