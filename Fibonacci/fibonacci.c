@@ -1,7 +1,6 @@
 /*
-successione di fibonacci
+fibonacci's succession:
 0 1 1 2 3 5 8 13 ...
-
 */
 
 #include <stdio.h>
@@ -56,21 +55,6 @@ long int str_to_lint(char* str){
 
 
 /*
-sets an array to defined behavior, initalizes the array to default value.
-
-input: pointer to acces the array, size of the array
-output: void
-
-it just iterates through the array cells, and sets their value to the default value, 0.
-*/
-void init_int_array(int* arr_ptr, int arr_size){
-    for(int i = 0; i < arr_size; i++) {
-        arr_ptr[i] = 0;
-    }
-}
-
-
-/*
 iterates through the cells of an array and prints the individual cell's content.
 
 input: ptr to the array
@@ -108,24 +92,28 @@ int fibonacci_slow(int pos){    // FIXME the position is an unsigned int
 /*
 a bit beacuse O is a power of n, which is not that fast, but way faster compared to 2^N.
 
-we achieved this optimization by caching the recurrent subproblems' solutions in a table: this technique is called dynamic programming.
+we achieved this optimization by caching the recurrent subproblems' solutions: this technique is called dynamic programming.
 Dynamic programming introduces some overhead, which is given by accessing and storing the caching table, but if the upsides are higher than the downsides, it's the way to go.
+
+For simplicity, in this piece of code we suppose that pos is > 2.
 */
-int fibonacci_a_bit_faster(int pos){    // FIXME position is an unsigned int
-    int caching_table_size = pos;   
-    int *caching_table = malloc(sizeof(int) * caching_table_size);
-    init_int_array(caching_table, caching_table_size);
+int fibonacci_a_bit_faster(int pos){    // FIXME position is an unsigned int   
+    int cache[] = {0, 0};
 
-    caching_table[0] = 0;   // first value in fibonacci's succession
-    caching_table[1] = 1;
+    cache[0] = 0;   // first value in fibonacci's succession
+    cache[1] = 1;
 
-    for(int i = 2; i < caching_table_size; i++) {
-        caching_table[i] = caching_table[i - 1] + caching_table[i - 2];
+    // to optimize the occupied space, we just keep the numbers we need to compute the next number, not all of them
+    int tmp = 0;
+    for(int i = 2; i < pos; i++) {
+        tmp = cache[1];
+        cache[1] = cache[i - 2] + cache[i - 1];
+        cache[0] = tmp;
     }
 
-    int fib_num_at_pos = caching_table[pos - 1];
+    int fib_num_at_pos = cache[1];
 
-    free(caching_table);
+    free(cache);
 
     return fib_num_at_pos;
 }
