@@ -90,7 +90,7 @@ int fibonacci_slow(int pos){    // FIXME the position is an unsigned int
 }
 
 /*
-a bit beacuse O is a power of n, which is not that fast, but way faster compared to 2^N.
+a bit because O is a power of n, which is not that fast, but way faster compared to 2^N.
 
 we achieved this optimization by caching the recurrent subproblems' solutions: this technique is called dynamic programming.
 Dynamic programming introduces some overhead, which is given by accessing and storing the caching table, but if the upsides are higher than the downsides, it's the way to go.

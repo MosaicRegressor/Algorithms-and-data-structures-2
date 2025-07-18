@@ -6,7 +6,7 @@
             "type":"cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
-            "args": ["43"],
+            "args": ["aa", "aaaaa"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
