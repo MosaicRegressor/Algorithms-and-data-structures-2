@@ -141,7 +141,7 @@ int lcs(char* str_Y, char* str_X){  // Y will be placed as columns, X as rows
     puts("build opt. sol. cache table:");
     print_tbl(cache_tbl_get_sol, len_x_rows, len_y_cols);
 
-
+    
 
 
     dealloc_table(cache_tbl_get_sol, len_y_cols);

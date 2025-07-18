@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name":"LAUNCH CURRENT FILE WITH ARGS",
+            "name":"Build, then launch with args and debug :)",
             "type":"cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
@@ -11,7 +11,8 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "MIMode": "gdb",
-            "externalConsole": false
+            "externalConsole": false,
+            "preLaunchTask": "Compile and debug C :3"
         }
     ]
 }
