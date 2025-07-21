@@ -89,8 +89,8 @@ int lcs(char* str_Y, char* str_X){  // Y will be placed as columns, X as rows
     the time complexity is theta(number_of_columns * number_of_rows), polinomial(not exponential!), approx. n^2
     the space complexity is n^2 too.
     */
-    for(int r = 0; r < len_x_rows; r++) { // iterate through rows, i
-        for(int c = 0; c < len_y_cols; c++) {     // iterate though columns, j
+    for(int r = 1; r < len_x_rows; r++) { // iterate through rows, i
+        for(int c = 1; c < len_y_cols; c++) {     // iterate though columns, j
             // case1, Xi and Yj are equal: diagonal movement, sum 1 to the diagonal value and write to the cell
             if(str_X[r] == str_Y[c]) {
                 cache_tbl_get_length_sol[c][r] = cache_tbl_get_length_sol[c - 1][r - 1] + 1;
@@ -138,8 +138,9 @@ int main(int argc, char* argv[argc + 1]) {
         printf("X(rows): ");
         printCString(X);
 
-        printf("Length of LCS: ");
-        lcs(Y, X);
+        int lcs_len = lcs(Y, X);
+        printf("Length of LCS: %d\n", lcs_len);
+        
 
         // TODO print the lcs
     }
