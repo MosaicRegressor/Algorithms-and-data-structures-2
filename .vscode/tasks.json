@@ -23,7 +23,7 @@
             "detail": "Compile and debug C file"
         },
         {
-            "label": "Build with make",
+            "label": "Compile multi C src project :3",
             "type": "shell",
             "command": "make",
             "group": {
@@ -31,7 +31,7 @@
                 "isDefault": true
             },
             "problemMatcher": ["$gcc"],
-            "detail": "Compila il progetto usando make"
+            "detail": "Compile project with make"
         }
     ]
 }

@@ -18,7 +18,7 @@
             "name": "Make and Debug with args the current C source :3 ",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",  // o dove si trova l'eseguibile
+            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",
             "args": ["ababahljfkgks", "asiabbbbbaefuyfkgkhla"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -32,8 +32,8 @@
                 "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build with make", // ← QUI COLLEGHI la task di build
-            "miDebuggerPath": "/usr/bin/gdb"    // o il path a gdb
+            "preLaunchTask": "Compile multi C src project :3",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

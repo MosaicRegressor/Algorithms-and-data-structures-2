@@ -68,10 +68,12 @@ int main(int argc, char* argv[argc + 1]) {
 
         puts("Start fibonacci without dynamic programming:");
         printf("%d\n", fibonacci_slow(parsed_input));
+
+        return 0;
     }
     else{
         printf("Not enough args!\n");
-    }
 
-    return 0;
+        return 1;
+    }
 }

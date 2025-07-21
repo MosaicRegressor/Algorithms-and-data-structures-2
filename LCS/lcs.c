@@ -143,10 +143,11 @@ int main(int argc, char* argv[argc + 1]) {
         
 
         // TODO print the lcs
+
+        return 0;
     }
     else {
         puts("Not enough args! Gimme 2 strings!");
+        return 1;
     }
-
-    return 0;
 }

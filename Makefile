@@ -13,6 +13,7 @@ CFLAGS = -Werror -Wall -Wextra -pedantic -std=c11 -g -Iinclude    # -Iinclude pe
 # Cartelle sorgente
 LCS_DIR = ./LCS
 FIB_DIR = ./Fibonacci
+LIS_DIR = ./LIS
 HELPER_DIR = ./custom_helper_libs
 INCLUDE_DIR = ./include
 
@@ -21,16 +22,20 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 # File .o (con percorso completo)
+HELPER_OBJ = $(OBJ_DIR)/helper_lib.o
 LCS_OBJ = $(OBJ_DIR)/lcs.o
 FIB_OBJ = $(OBJ_DIR)/fibonacci.o
-HELPER_OBJ = $(OBJ_DIR)/helper_lib.o
+LIS_OBJ = $(OBJ_DIR)/lis.o
 
 # Eseguibili
 LCS_BIN = $(BIN_DIR)/lcs.out
 FIB_BIN = $(BIN_DIR)/fibonacci.out
+LIS_BIN = $(BIN_DIR)/lis.out
 
 # Target principale
-all: $(LCS_BIN) $(FIB_BIN)
+all: $(LCS_BIN) $(FIB_BIN) $(LIS_BIN)
+
+# ----------------------------------------------------------------------------------
 
 # Regola per creare la cartella obj se non esiste
 $(OBJ_DIR):
@@ -40,6 +45,8 @@ $(OBJ_DIR):
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
+# ---------------------------------------------------------------------------------
+
 # Compila l'eseguibile lcs.out
 $(LCS_BIN): $(LCS_OBJ) $(HELPER_OBJ) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -47,6 +54,16 @@ $(LCS_BIN): $(LCS_OBJ) $(HELPER_OBJ) | $(BIN_DIR)
 # Compila l'eseguibile fibonacci.out
 $(FIB_BIN): $(FIB_OBJ) $(HELPER_OBJ) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
+
+# Compila l'eseguibile lis.out
+$(LIS_BIN): $(LIS_OBJ) $(HELPER_OBJ) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# ---------------------------------------------------------------------------------
+
+# Compila l'object file helper_lib.o
+$(HELPER_OBJ): $(HELPER_DIR)/helper_lib.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Compila l'object file lcs.o
 $(LCS_OBJ): $(LCS_DIR)/lcs.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
@@ -56,9 +73,13 @@ $(LCS_OBJ): $(LCS_DIR)/lcs.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
 $(FIB_OBJ): $(FIB_DIR)/fibonacci.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Compila l'object file helper_lib.o
-$(HELPER_OBJ): $(HELPER_DIR)/helper_lib.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
+# Compila l'object file lis.o
+$(LIS_OBJ): $(LIS_DIR)/lis.c $(INCLUDE_DIR)/helper_lib.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# ---------------------------------------------------------------------------------
+
+
 
 # Pulizia
 clean:
