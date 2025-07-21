@@ -1,29 +1,37 @@
-// gcc -Werror -Wall -Wextra -pedantic -std=c11 file.c -g -o file.out
-// then start debugger
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Compile and debug C :3",
-      "type": "shell",
-      "command": "gcc",
-      "args": [
-        "-Werror",
-        "-Wall",
-        "-Wextra",
-        "-pedantic",
-        "-std=c11",
-        "${fileDirname}/${fileBasenameNoExtension}.c",
-        "-g",
-        "-o",
-        "${fileDirname}/${fileBasenameNoExtension}.out"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": ["$gcc"],
-      "detail": "Compile and debug C file"
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile one C src :3",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Werror",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-std=c11",
+                "${fileDirname}/${fileBasenameNoExtension}.c",
+                "-g",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.out"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Compile and debug C file"
+        },
+        {
+            "label": "Build with make",
+            "type": "shell",
+            "command": "make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compila il progetto usando make"
+        }
+    ]
 }
