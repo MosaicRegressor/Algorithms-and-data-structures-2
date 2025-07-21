@@ -116,6 +116,16 @@ void print_tbl(int* tbl[], int n_rows, int n_cols) {
 }
 
 /*
+given two numbers, returns who is greater than the other.
+
+input: the two numbers
+output: the maximum number between the two
+*/
+int max(int n1, int n2){
+    return (n1 < n2) ? n2 : n1;
+}
+
+/*
 computes the optimal solutions for the lcs problem given 2 strings as input. 
 
 input: strings where to find the lcs
@@ -126,7 +136,11 @@ problem to chache the subproblems.
 
 this dynamic algo uses 2 tables to do memoization(caching):
 - cache_tbl_get_length_sol, it tracks the length of the optimal solution
+    - it contains the lenghts of the optimal subproblems
 - cache_tbl_get_sol, it pinpoints the exact solution
+    - it contains an encoding: if in that cell a diagonal movement was done, write 3, ...
+
+just fill the table with every possible combination, then visit it.
 */
 int lcs(char* str_Y, char* str_X){  // Y will be placed as columns, X as rows
     int len_y_cols = CString_len(str_Y); // n, columns
@@ -141,13 +155,51 @@ int lcs(char* str_Y, char* str_X){  // Y will be placed as columns, X as rows
     puts("build opt. sol. cache table:");
     print_tbl(cache_tbl_get_sol, len_x_rows, len_y_cols);
 
-    
+    // fill the tables
 
+    // zero the first row
+    for (int col = 0; col < len_y_cols; col++) {
+        cache_tbl_get_length_sol[col][0] = 0;
+    }
+    // zero the first column
+    for (int row = 0; row < len_x_rows; row++){
+        cache_tbl_get_length_sol[0][row];
+    }
+
+    // let's implement the optimal substructure
+    /*
+    this is what slows down the most the algorithm, it's beacuse of nested for loops.
+    the time complexity is theta(number_of_columns * number_of_rows), polinomial(not exponential!), approx. n^2
+    the space complexity is n^2 too.
+    */
+    for(int r = 0; r < len_x_rows; r++) { // iterate through rows, i
+        for(int c = 0; c < len_y_cols; c++) {     // iterate though columns, j
+            // case1, Xi and Yj are equal: diagonal movement, sum 1 to the diagonal value and write to the cell
+            if(str_X[r] == str_Y[c]) {
+                cache_tbl_get_length_sol[c][r] = cache_tbl_get_length_sol[c - 1][r - 1] + 1;
+                cache_tbl_get_sol[c][r] = 3;
+            }
+            else{
+                cache_tbl_get_length_sol[c][r] = max(
+                                                    cache_tbl_get_length_sol[c - 1][r],
+                                                    cache_tbl_get_length_sol[c][r - 1]
+                                                    );
+                // TODO implement max_position
+                cache_tbl_get_sol[c][r] = max_position(
+                                            cache_tbl_get_length_sol[c - 1][r],
+                                            cache_tbl_get_length_sol[c][r - 1]
+                                            );
+            }
+        }
+    }
+
+    int lcs_len = cache_tbl_get_length_sol[len_y_cols - 1][len_x_rows - 1];
+    // TODO build the lcs and return it in a struct with lcs_len!
 
     dealloc_table(cache_tbl_get_sol, len_y_cols);
     dealloc_table(cache_tbl_get_length_sol, len_y_cols);
 
-    return 0;
+    return lcs_len;
 }
 
 
