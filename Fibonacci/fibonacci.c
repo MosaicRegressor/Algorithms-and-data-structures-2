@@ -5,7 +5,7 @@ fibonacci's succession:
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/helper_lib.h"
+#include "helper_lib.h"
 
 /*
 gives number at a certain position in fibonacci succession

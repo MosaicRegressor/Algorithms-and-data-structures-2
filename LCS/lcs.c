@@ -9,7 +9,7 @@ a subsequence can be contiguous but doesn't have to be, it just has to be a sequ
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/helper_lib.h"
+#include "helper_lib.h"
 
 // TODO
 // exponentital time!!! it recomputes already certain known common subsequences
