@@ -71,8 +71,9 @@ int main(int argc, char* argv[argc + 1]) {
 
         puts("Input string:");
         printCString(input_string);
+        puts("");
 
-        printf("Len of LIS: %d", lis(input_string));
+        printf("Len of LIS: %d\n", lis(input_string));
 
         return 0;
     }

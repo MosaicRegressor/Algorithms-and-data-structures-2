@@ -3,12 +3,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+TODO
+- check if malloc fails by checking if it returns NULL pointer 
+- check into functions if the passed pointer is NULL as safety
+*/
+
+
 // NB there must be a nullbyte terminator at the end of the string!
 void printCString(char* Cstring) {
     for (int i = 0; Cstring[i] != '\0'; i++){
         printf("%c", Cstring[i]);
     }
-    printf("\n");
 }
 
 // NB there must be a nullbyte terminator at the end of the string!
