@@ -22,7 +22,15 @@ int CString_len(char* Cstring) {
     return string_length;
 }
 
-
+/*
+just iterate through the array.
+*/
+void print_arr(int* ptr_arr, int len_arr) {
+    for(int i = 0; i < len_arr; i++) {
+        printf("%d", ptr_arr[i]);
+    }
+    puts("");
+}
 
 /*
 the user at runtime may input very big strings, let's allocate the caching tables in the heap.

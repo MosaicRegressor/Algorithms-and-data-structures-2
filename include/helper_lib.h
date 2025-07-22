@@ -61,6 +61,15 @@ output: ptr to the table allocated in the heap
 */
 int** alloc_table(int n_rows,int n_cols);
 
+
+/*
+print the content of an array of int
+
+input: ptr to the array, size of the array FIXME the size should be of type size_t
+output: write in stdout the content of the array
+*/
+void print_arr(int* ptr_arr, int len_arr);
+
 /*
 get length of CString
 
