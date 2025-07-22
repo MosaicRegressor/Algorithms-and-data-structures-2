@@ -37,17 +37,16 @@ the user at runtime may input very big strings, let's allocate the caching table
 a table is an array of pointers, to arrays of ints.
 */
 int** alloc_table(int n_rows,int n_cols) {
-    int** tbl = malloc(sizeof(int*) * n_cols);  // TODO optimize! memory fragmentation!
-
-    // init the empty table, set defined behavior
-    for(int col = 0; col < n_cols; col++) {
-        tbl[col] = NULL;
-    }
+    int** tbl = calloc(n_cols, sizeof(int*));   // TODO optimize! memory fragmentation!
+                                                // set defined behavior, done by calloc
 
     // alloc the columns with the cell rows
     for(int col = 0; col < n_cols; col++) {
-        tbl[col] = malloc(sizeof(int) * n_rows);
+        tbl[col] = calloc(n_rows, sizeof(int));
     }
+
+    /*
+    done automatically by calloc
 
     // set each of the columns row cells to defined behavior
     for(int col = 0; col < n_cols; col++) {     // TODO slow!, is it that necessary?
@@ -55,6 +54,8 @@ int** alloc_table(int n_rows,int n_cols) {
             tbl[col][row] = 0;
         }
     }
+
+    */
 
     return tbl;
 }
