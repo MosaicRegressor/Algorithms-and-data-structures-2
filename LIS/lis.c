@@ -50,7 +50,7 @@ int lis(char* input_string) {
         cache_arr[i] = max + 1;
         print_arr(cache_arr, len_input_str);
     }
-    // now let's get the biggest between all of the calculated values
+    // now let's get the biggest between all of the calculated values(you can also do this while you are computing)
     int max_tot = 0;
     for(int i = 0; i < len_input_str; i++){
         if(cache_arr[i] > max_tot){
@@ -58,6 +58,17 @@ int lis(char* input_string) {
         }
     }
     free(cache_arr);
+
+
+    /*
+        TODO
+        then, to find the lcs, i gotta iterate from the last to the beginning: you can build it by looking at the
+        step by step values of the computation that happened
+        
+        2 methods:
+            - scan in place
+            - use additional data structure
+    */
 
     return max_tot;
 }
