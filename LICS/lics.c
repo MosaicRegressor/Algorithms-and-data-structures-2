@@ -5,6 +5,7 @@ find a common subsequence between the two input strings, which is the longest an
 */
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "helper_lib.h"
 
 /*
@@ -141,6 +142,7 @@ int lics(char X[], char Y[]) {
     int max_tot = 0;
     max_tot = find_max_tot(cache_tbl, n_cols, n_rows);
 
+    dealloc_table(cache_tbl, n_cols);
     return max_tot;
 }
 
