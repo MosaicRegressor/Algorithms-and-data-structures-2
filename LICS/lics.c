@@ -28,7 +28,7 @@ int get_max_prev_comp_lics_len(int* tbl[static 1], int susp_col, int susp_row, c
     int len_lics = 0;
     for(int row = 0; row < susp_row; row++) {
         for(int col = 0; col < susp_col; col++) { // we make sure to find till one step before the char we want to attach
-            if(row == susp_row && col == susp_col) {
+            if(row == susp_row && col == susp_col) {    // TODO refactor! bad hack!
                 break;
             }
 
