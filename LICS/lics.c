@@ -25,15 +25,15 @@ int get_max_prev_comp_lics_len(int* tbl[static 1], int susp_col, int susp_row, c
     int max = 0;
     
     bool is_compatible = false;
-    int len_lics = 0; 
-    for(int row = 0; row <= susp_row; row++) {
-        for(int col = 0; col <= susp_col; col++) { // we make sure to find till one step before the char we want to attach
-            if(row == susp_row && col == (susp_col - 1)) {
+    int len_lics = 0;
+    for(int row = 0; row < susp_row; row++) {
+        for(int col = 0; col < susp_col; col++) { // we make sure to find till one step before the char we want to attach
+            if(row == susp_row && col == susp_col) {
                 break;
             }
 
             len_lics = tbl[col][row];
-            is_compatible = len_lics != 0 && Y[col] <= Y[susp_col];
+            is_compatible = len_lics != 0 && Y[col] < Y[susp_col];
             
             if (is_compatible && len_lics > max) {     // if we are looking at a lics that ends with a compatible char, and its its last char is compatible with the char that we want to attach
                 max = tbl[col][row];
@@ -80,6 +80,8 @@ We compare the two characters.
 If we got two different characters, we are breaking the rule #2, so the len of the lics up to that point is 0.
 If we got two characters that are equal rule #1 is satisfied, therefore we look at the previously computed results: between them we find the
 lengths of licses that end with a compatible character(to safisfy rule #3), and we pick the max between them(to satisfy rule #4)   
+
+due to dynamic programming, the execution time goes from 2^n to n^4, so cool!! :))
 */
 
 /*
@@ -110,7 +112,7 @@ int lics(char X[], char Y[]) {
     print_tbl(cache_tbl, n_rows, n_cols);
     // now everything is perfectly balanced, as all things should be(we got defined behaviour) 
 
-    
+
     // let's iterate step by step through the strings
     for(int row = 0; row < n_rows; row++) {
         for(int col = 0; col < n_cols; col++) {
