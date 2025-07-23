@@ -78,6 +78,7 @@ void dealloc_table(int* tbl[], int n_cols) {
 }
 
 void print_tbl(int* tbl[], int n_rows, int n_cols) {
+    puts("print status of tbl");
     for(int row = 0; row < n_rows; row++){  // iterate through columns
         for(int col = 0; col < n_cols; col++) { // iterate through rows
             printf("%d", tbl[col][row]);

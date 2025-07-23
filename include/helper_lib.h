@@ -54,10 +54,10 @@ input: ptr to table, n of columns
 void dealloc_table(int* tbl[], int n_cols);
 
 /*
-allocate on the heap a table of size n x m and init it(set default behavior).
+allocate on the heap a table of integers of size n x m and init it(set default behavior).
 
 input: number of rows and columns
-output: ptr to the table allocated in the heap
+output: ptr to a table of integers allocated in the heap
 */
 int** alloc_table(int n_rows,int n_cols);
 
