@@ -11,8 +11,6 @@ find a common subsequence between the two input strings, which is the longest an
 /*
 TODO
 test cases: check with input that contains duplicate characters.
-FIXME
-put an additional column and row zeroed out
 */
 
 /*
@@ -109,19 +107,10 @@ int lics(char X[], char Y[]) {
     int n_rows = len_x; 
 
     int** cache_tbl = alloc_table(n_rows, n_cols);
-
-    // the next steps are already done by calloc, but we do it for the sake of completeness of the algorithm
-    // let's zero the first row
-    for(int i = 0; i < n_cols; i++) {
-        cache_tbl[i][0] = 0;
-    }
-    // let's zero the first column
-    for(int i = 0; i < n_rows; i++) {
-        cache_tbl[0][i] = 0;
-    }
     print_tbl(cache_tbl, n_rows, n_cols);
     // now everything is perfectly balanced, as all things should be(we got defined behaviour) 
 
+    
     // let's iterate step by step through the strings
     for(int row = 0; row < n_rows; row++) {
         for(int col = 0; col < n_cols; col++) {

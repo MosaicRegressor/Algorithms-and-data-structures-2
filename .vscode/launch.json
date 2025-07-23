@@ -19,7 +19,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",
-            "args": ["abcedf", "anbcfe"],
+            "args": ["abcbadeg", "dabbaef"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
